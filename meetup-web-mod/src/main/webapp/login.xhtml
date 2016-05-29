@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</h:head>
+<h:body>
+	<h:form>
+	
+    	
+    	<b:well>
+    	<h3>Identifiez vous</h3>
+  		<h:panelGrid id="inform" columns="2" cellpadding="5">
+  		
+  		
+   	    	<h:outputLabel for="usernameInput">#{bundle['login.username']}:</h:outputLabel>
+    		<b:inputText id="usernameInput" value="#{loginBean.username}" required="true" />
+    		<h:outputLabel for="passwordInput">#{bundle['login.password']}:</h:outputLabel>
+    		<b:inputSecret  id="passwordInput" value="#{loginBean.password}" required="true" />
+    	        
+       	    <b:commandButton id="cb" value="#{bundle['login.submit']}" action="#{loginBean.login}" />
+        </h:panelGrid>
+        </b:well>
+
+		</h:form>
+</h:body>
+</html>
+
+

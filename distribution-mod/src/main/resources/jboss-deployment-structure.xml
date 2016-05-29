@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+  <ear-subdeployments-isolated>false</ear-subdeployments-isolated>
+<!--   <sub-deployment name="meetup-web-mod.war"> -->
+<!--    <dependencies> -->
+<!--      <module name="meetup-persistence-mod.jar" /> -->
+<!--      <module name="meetup-services-mod.jar" /> -->
+<!--     </dependencies> -->
+<!-- </sub-deployment> -->
+</jboss-deployment-structure>

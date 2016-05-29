@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    MeetUP
+</h:head>
+<h:body>
+
+   <h:outputText value="#{loginBean.username}"/> is connected.
+   <h:outputText value="#{helloWorld.message}"/> 
+
+   
+    <h:form>
+
+            <div>
+            
+                <h:panelGrid columns="2">
+                    <h:outputText value="firstname :"/>
+                    <h:inputText id="firstname" value="#{controllerBean.patient.firstName}" readonly="true"/>
+                    <!--h:message for="firstname" style="color: red;"/-->
+
+                    <h:outputText value="lastname :"/>
+                    <h:inputText id="lastname" value="#{controllerBean.patient.lastName}" readonly="true"/>
+                    <!--h:message for="lastname" style="color: red;"/-->
+
+                    <h:outputText value="email :"/>
+                    <h:inputText id="email" value="#{controllerBean.patient.email}" readonly="true"/>
+                    <!--h:message for="email" style="color: red;"/-->
+
+                </h:panelGrid>
+            </div>
+            
+                 <div>
+                <h:commandButton value="#{i18n.submit}" action="#{controllerBean.addPatient}" type="submit"/>
+            </div>
+     </h:form>
+</h:body>
+</html>

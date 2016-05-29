@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+  <name>distribution-mod</name>
+  <comment>Distribution - EAR. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <projects>
+    <project>meetup-facade-mod</project>
+    <project>meetup-persistence-mod</project>
+    <project>meetup-web-mod</project>
+    <project>meetup-services-mod</project>
+  </projects>
+  <buildSpec/>
+  <natures/>
+</projectDescription>

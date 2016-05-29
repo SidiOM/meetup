@@ -1,0 +1,210 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>meetup-services-mod</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<parent>
+		<artifactId>master</artifactId>
+		<groupId>com.archane.consulting</groupId>
+		<version>0.0.2-SNAPSHOT</version>
+		<relativePath>..\master</relativePath>
+	</parent>
+
+	<dependencies>
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.enterprise</groupId> -->
+<!-- 			<artifactId>cdi-api</artifactId> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.spec.javax.transaction</groupId> -->
+<!-- 			<artifactId>jboss-transaction-api_1.1_spec</artifactId> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+
+		<!-- Import the EJB 3.1 API, we use runtime scope because we aren't using 
+			any direct reference to EJB spec API in our client code -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.spec.javax.ejb</groupId> -->
+<!-- 			<artifactId>jboss-ejb-api_3.1_spec</artifactId> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+
+		<!-- We depend on the EJB remote business interfaces of this application -->
+
+
+		<!-- JBoss EJB client API jar. We use runtime scope because the EJB client 
+			API isn't directly used in this example. We just need it in our runtime classpath -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss</groupId> -->
+<!-- 			<artifactId>jboss-ejb-client</artifactId> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+
+		<!-- client communications with the server use XNIO -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.xnio</groupId> -->
+<!-- 			<artifactId>xnio-api</artifactId> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.xnio</groupId> -->
+<!-- 			<artifactId>xnio-nio</artifactId> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+
+		<!-- The client needs JBoss remoting to access the server -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.remoting3</groupId> -->
+<!-- 			<artifactId>jboss-remoting</artifactId> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+
+		<!-- Remote EJB accesses can be secured -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.sasl</groupId> -->
+<!-- 			<artifactId>jboss-sasl</artifactId> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+
+		<!-- data serialization for invoking remote EJBs -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.marshalling</groupId> -->
+<!-- 			<artifactId>jboss-marshalling-river</artifactId> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+
+		<!-- Spring Framework -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.archane.consulting</groupId>
+			<artifactId>meetup-persistence-mod</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.archane.consulting</groupId>
+			<artifactId>meetup-facade-mod</artifactId>
+			<type>ejb</type>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<resources>
+			<!-- regular resource processsing for everything except logback.xml -->
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${version.exec.plugin}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>java</executable>
+					<workingDirectory>${project.build.directory}/exec-working-directory</workingDirectory>
+					<arguments>
+						<!-- automatically creates the classpath using all project dependencies, 
+							also adding the project build directory -->
+						<argument>-classpath</argument>
+						<classpath>
+						</classpath>
+						<argument>org.jboss.as.quickstarts.ejb.remote.client.RemoteEJBClient</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+			<!-- build standalone exe jar -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>org.jboss.as.quickstarts.ejb.remote.client.RemoteEJBClient</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<!-- The JBoss AS plugin deploys your apps to a local JBoss EAP container -->
+			<!-- Disabling it here means that we don't try to deploy this POM! -->
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>${version.jboss.maven.plugin}</version>
+				<inherited>true</inherited>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-jar-plugin</artifactId> -->
+			<!-- <configuration> -->
+			<!-- <archive> -->
+			<!-- <manifest> -->
+			<!-- <addClasspath>true</addClasspath> -->
+			<!-- </manifest> -->
+			<!-- </archive> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
+
+		</plugins>
+
+	</build>
+
+</project>
